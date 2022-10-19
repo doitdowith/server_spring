@@ -1,4 +1,4 @@
-package com.seoultech.capstone.chat.controller.dto;
+package com.seoultech.capstone.chat.controller;
 
 import lombok.Getter;
 

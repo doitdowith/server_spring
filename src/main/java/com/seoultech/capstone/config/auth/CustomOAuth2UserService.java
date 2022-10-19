@@ -1,17 +1,13 @@
 package com.seoultech.capstone.config.auth;
 
 import com.seoultech.capstone.member.Member;
-import com.seoultech.capstone.member.repository.MemberRepository;
-import java.util.Collections;
-import javax.servlet.http.HttpServletRequest;
+import com.seoultech.capstone.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 

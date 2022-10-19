@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.seoultech.capstone.exception.NotExistMemberException;
 import com.seoultech.capstone.member.Member;
+import com.seoultech.capstone.member.MemberRepository;
 import com.seoultech.capstone.member.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

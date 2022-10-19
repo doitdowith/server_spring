@@ -1,4 +1,4 @@
-package com.seoultech.capstone.chat.controller.dto;
+package com.seoultech.capstone.chat.controller;
 
 import com.seoultech.capstone.chat.Chat;
 import com.seoultech.capstone.member.Member;

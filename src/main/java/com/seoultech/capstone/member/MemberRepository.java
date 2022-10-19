@@ -1,6 +1,5 @@
-package com.seoultech.capstone.member.repository;
+package com.seoultech.capstone.member;
 
-import com.seoultech.capstone.member.Member;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

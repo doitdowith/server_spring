@@ -4,7 +4,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import com.seoultech.capstone.chat.Chat;
-import com.seoultech.capstone.chat.controller.dto.ChatRequest.CreateDto;
 import com.seoultech.capstone.chat.repository.ChatRepository;
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.member.Role;
