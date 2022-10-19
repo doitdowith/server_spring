@@ -26,10 +26,7 @@ public class OAuth2AuthenticationSuccessHandler implements
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
     TokenDto tokenDto = tokenProvider.generateToken(authentication);
-    response.setContentType("application/json");
-    response.setCharacterEncoding("utf-8");
-
-    String result = objectMapper.writeValueAsString(tokenDto);
-    response.getWriter().write(result);
+    response.setHeader("accessToken", tokenDto.getAccessToken());
+    response.setHeader("refreshToken", tokenDto.getRefreshToken());
   }
 }
