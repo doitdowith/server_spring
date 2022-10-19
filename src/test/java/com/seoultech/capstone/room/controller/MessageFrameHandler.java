@@ -7,9 +7,9 @@ import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 
 
+@Getter
 public class MessageFrameHandler<T> implements StompFrameHandler {
 
-  @Getter
   private final CompletableFuture<T> completableFuture = new CompletableFuture<>();
 
   private final Class<T> tClass;

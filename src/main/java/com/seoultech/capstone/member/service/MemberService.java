@@ -1,9 +1,16 @@
 package com.seoultech.capstone.member.service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.seoultech.capstone.TokenDto;
 import com.seoultech.capstone.exception.NotExistMemberException;
 import com.seoultech.capstone.jwt.TokenProvider;
 import com.seoultech.capstone.member.Member;
+import com.seoultech.capstone.member.Role;
 import com.seoultech.capstone.member.MemberRepository;
+import io.vavr.control.Either;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

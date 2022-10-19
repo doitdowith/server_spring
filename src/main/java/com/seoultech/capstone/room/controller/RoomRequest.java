@@ -1,4 +1,4 @@
-package com.seoultech.capstone.room.controller.dto;
+package com.seoultech.capstone.room.controller;
 
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.room.Room;
