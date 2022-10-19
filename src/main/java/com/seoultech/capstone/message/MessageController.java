@@ -18,7 +18,7 @@ public class MessageController {
   @MessageMapping("/chat")
   public void enter(ChatMessage message) {
     ReceiveMessage receiveMessage = chatService.saveChat(message);
-    simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(),
+    simpMessageSendingOperations.convertAndSend("/sub/api/v1/room/" + message.getRoomId(),
         receiveMessage);
   }
 
