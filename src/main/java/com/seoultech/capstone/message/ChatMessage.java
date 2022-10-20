@@ -11,7 +11,6 @@ import lombok.Getter;
 public class ChatMessage {
 
   private String contents;
-  private String memberId;
   private String roomId;
 
   public Chat toEntity(Member member, Room room) {

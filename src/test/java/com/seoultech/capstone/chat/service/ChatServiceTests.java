@@ -43,16 +43,5 @@ class ChatServiceTests {
     chat = new Chat("채팅 내용", member, room);
   }
 
-  @Test
-  @Transactional
-  void saveTest() {
-    ChatMessage create = new ChatMessage(member.getId(), "채팅내용", room.getId());
-
-    given(memberService.findMemberById(any())).willReturn(member);
-    given(chatRepository.save(any())).willReturn(chat);
-
-    chatService.saveChat(create);
-  }
-
 
 }

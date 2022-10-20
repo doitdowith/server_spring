@@ -35,6 +35,10 @@ dependencies {
     implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+    implementation group: 'com.google.firebase', name: 'firebase-admin', version: '8.1.0'
+    implementation group: 'com.google.auth', name: 'google-auth-library-credentials', version: '1.5.3'
+    implementation group: 'com.google.auth', name: 'google-auth-library-oauth2-http', version: '1.5.3'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'

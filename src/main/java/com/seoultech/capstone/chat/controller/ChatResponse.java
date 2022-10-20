@@ -6,6 +6,10 @@ import lombok.Getter;
 public class ChatResponse {
 
 
+  static class ListAllDto {
+
+
+  }
 
 
 }

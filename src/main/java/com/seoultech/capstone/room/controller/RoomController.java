@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +30,24 @@ public class RoomController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @SubscribeMapping("/{roomId}")
-  public ResponseEntity<Void> enterRoom(@DestinationVariable Long roomId) {
-    System.out.println(roomId);
-    return null;
+  @GetMapping("/doing")
+  public ResponseEntity<Void> doingRoom() {
+    return ResponseEntity.ok().build();
   }
 
+  @GetMapping("/willdo")
+  public ResponseEntity<Void> willdoRoom() {
+    return ResponseEntity.ok().build();
+  }
+
+  @GetMapping("/done")
+  public ResponseEntity<Void> doneRoom() {
+    return ResponseEntity.ok().build();
+  }
+
+  @DeleteMapping("/{roomId}")
+  public ResponseEntity<Void> deleteRoom() {
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
 
 }

@@ -31,6 +31,7 @@ public class Chat extends BaseTimeEntity {
     this.content = content;
     this.member = member;
     this.room = room;
+    room.getChatList().add(this);
   }
 
   protected Chat() {
