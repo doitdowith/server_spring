@@ -44,6 +44,10 @@ public class Member {
     this.role = role;
   }
 
+  public void setProfileImage(Image profileImage) {
+    this.profileImage = profileImage;
+  }
+
   protected Member() {
   }
 }

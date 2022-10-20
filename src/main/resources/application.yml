@@ -16,3 +16,6 @@ spring:
 
   profiles:
     include: oauth
+
+file:
+  dir: /Users/jojaeyeong/Desktop/upload/

@@ -20,18 +20,23 @@ public class Image {
 
   private String storeFileName;
 
-  public Image(String originalFilename, String storeFileName) {
+  @Enumerated(EnumType.STRING)
+  private Category category;
+
+  public Image(String originalFilename, String storeFileName,
+      Category category) {
     this.originalFilename = originalFilename;
     this.storeFileName = storeFileName;
+    this.category = category;
   }
 
   public String getResizeFileName(int width, int height) {
     int pos = this.storeFileName.lastIndexOf(".");
-    String ext = extractExt(this.storeFileName);
+    String ext = extractExt();
     return this.storeFileName.substring(0, pos) + "_" + width + "x" + height + "." + ext;
   }
 
-  private String extractExt(String originalFilename) {
+  private String extractExt() {
     int pos = originalFilename.lastIndexOf(".");
     return originalFilename.substring(pos + 1);
   }

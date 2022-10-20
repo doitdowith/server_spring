@@ -1,5 +1,6 @@
 package com.seoultech.capstone.config.auth;
 
+import com.seoultech.capstone.image.ImageService;
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
   private final MemberRepository memberRepository;
+  private final ImageService imageService;
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -47,6 +49,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
   private Member saveOrUpdate(OAuthAttributes attributes) {
     Member member = memberRepository.findByEmail(attributes.getEmail())
         .orElse(attributes.toEntity());
+    member.setProfileImage(imageService.findDefaultProfileImage());
     return memberRepository.save(member);
   }
 }

@@ -30,24 +30,10 @@ public class MemberService {
   private final RestTemplate restTemplate;
   private final TokenProvider tokenProvider;
 
+
+
   public Member findMemberById(String memberId) {
     return memberRepository.findById(memberId).orElseThrow(NotExistMemberException::new);
-  }
-
-
-  private String get(String apiUrl, String accessToken) {
-    try {
-      HttpHeaders headers = new HttpHeaders();
-      headers.set("Authorization", "Bearer " + accessToken);
-
-      HttpEntity entity = new HttpEntity(headers);
-      ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity,
-          String.class);
-
-      return response.getBody();
-    } catch (HttpStatusCodeException e) {
-      throw new RuntimeException("API 요청과 응답 실패", e);
-    }
   }
 
 }

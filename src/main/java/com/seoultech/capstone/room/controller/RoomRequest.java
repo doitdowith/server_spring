@@ -12,9 +12,7 @@ public class RoomRequest {
 
   @Getter
   @AllArgsConstructor
-  public static class CreateDto {
-
-    private String masterId;
+  static class CreateDto {
 
     private String title;
 
