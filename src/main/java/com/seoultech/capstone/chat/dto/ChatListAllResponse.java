@@ -8,9 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ChatListAllResponse {
 
-  private List<ChatDto> data;
+  private List<?> data;
 
-  public static ChatListAllResponse from(List<ChatDto> collect) {
+  public static ChatListAllResponse from(List<?> collect) {
     return new ChatListAllResponse(collect);
   }
 

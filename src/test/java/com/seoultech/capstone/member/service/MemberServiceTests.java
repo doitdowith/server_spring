@@ -15,6 +15,14 @@ class MemberServiceTests {
   @Autowired
   MemberService memberService;
 
+  @Test
+  void memberServiceTest() {
+
+
+
+
+  }
+
 
 
 }

@@ -11,15 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/alarm")
 public class AlarmController {
 
-  @GetMapping
-  public ResponseEntity<Void> alarmList() {
-    return ResponseEntity.ok().build();
-  }
-
-  @GetMapping("/{alarmId}")
-  public ResponseEntity<Void> detailAlarm() {
-    return ResponseEntity.ok().build();
-  }
-
 
 }

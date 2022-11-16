@@ -1,12 +1,9 @@
 package com.seoultech.capstone.chat.service;
 
 import com.seoultech.capstone.chat.Chat;
-import com.seoultech.capstone.chat.controller.ChatResponse;
-import com.seoultech.capstone.chat.dto.ChatDto;
 import com.seoultech.capstone.chat.dto.ChatListAllResponse;
 import com.seoultech.capstone.chat.repository.ChatRepository;
 import com.seoultech.capstone.member.Member;
-import com.seoultech.capstone.member.service.MemberService;
 import com.seoultech.capstone.message.ChatMessage;
 import com.seoultech.capstone.message.ReceiveMessage;
 import com.seoultech.capstone.room.Room;
@@ -32,15 +29,13 @@ public class ChatService {
     return ReceiveMessage.from(member, chat);
   }
 
-  public ChatListAllResponse listAll(Member member, String roomId) {
+  public List<ChatDto> listAll(Member member, String roomId) {
     Room room = roomService.findRoomById(roomId);
     List<Chat> chatList = room.getChatList();
 
-    List<ChatDto> collect = chatList.stream()
+    return chatList.stream()
         .map((chat) -> ChatDto.from(chat, chat.getMember().getId().equals(member.getId())))
         .collect(Collectors.toList());
-
-    return ChatListAllResponse.from(collect);
   }
 
 

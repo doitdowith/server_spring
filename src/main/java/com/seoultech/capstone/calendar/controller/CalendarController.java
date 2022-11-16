@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/calendar")
 public class CalendarController {
 
-  @GetMapping("/my")
-  public ResponseEntity<Void> calendarList() {
-    return ResponseEntity.ok().build();
-  }
-
-  @GetMapping("/{calendarId}")
-  public ResponseEntity<Void> detailMission() {
-    return ResponseEntity.ok().build();
-  }
+//  @GetMapping("/my")
+//  public ResponseEntity<Void> calendarList() {
+//    return ResponseEntity.ok().build();
+//  }
+//
+//  @GetMapping("/{calendarId}")
+//  public ResponseEntity<Void> detailMission() {
+//    return ResponseEntity.ok().build();
+//  }
 
 }

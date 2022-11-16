@@ -5,7 +5,6 @@ import com.seoultech.capstone.member.Member;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @Getter
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.seoultech.capstone.chat.dto;
+package com.seoultech.capstone.chat.service;
 
 import com.seoultech.capstone.chat.Chat;
 import lombok.AllArgsConstructor;

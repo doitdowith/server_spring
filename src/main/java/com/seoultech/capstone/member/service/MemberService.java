@@ -5,11 +5,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.seoultech.capstone.TokenDto;
 import com.seoultech.capstone.exception.NotExistMemberException;
+import com.seoultech.capstone.friend.Friend;
+import com.seoultech.capstone.friend.service.FriendService;
 import com.seoultech.capstone.jwt.TokenProvider;
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.member.Role;
 import com.seoultech.capstone.member.MemberRepository;
 import io.vavr.control.Either;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -27,10 +30,14 @@ import org.springframework.web.client.RestTemplate;
 public class MemberService {
 
   private final MemberRepository memberRepository;
-  private final RestTemplate restTemplate;
-  private final TokenProvider tokenProvider;
+  private final FriendService friendService;
+
+  public MyPage findMyPage(String memberId) {
 
 
+
+    return null;
+  }
 
   public Member findMemberById(String memberId) {
     return memberRepository.findById(memberId).orElseThrow(NotExistMemberException::new);

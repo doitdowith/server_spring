@@ -23,7 +23,7 @@ public class MessageController {
   public void enter(@Auth String memberId, ChatMessage message) {
     Member member = memberService.findMemberById(memberId);
     ReceiveMessage receiveMessage = chatService.saveChat(member, message);
-    simpMessageSendingOperations.convertAndSend("/sub/api/v1/room/" + message.getRoomId(),
+    simpMessageSendingOperations.convertAndSend("/sub/room/" + message.getRoomId(),
         receiveMessage);
   }
 

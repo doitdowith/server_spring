@@ -27,7 +27,7 @@ public class ChatController {
       @PathVariable String roomId) {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
-        .body(chatService.listAll(member, roomId));
+        .body(ChatListAllResponse.from(chatService.listAll(member, roomId)));
   }
 
 
