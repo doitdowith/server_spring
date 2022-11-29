@@ -6,7 +6,6 @@ import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.member.MemberRepository;
 
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
