@@ -39,6 +39,8 @@ public class RoomMember {
     this.member = member;
     if (isMaster) {
       this.accept = true;
+    } else {
+      this.accept = false;
     }
   }
 

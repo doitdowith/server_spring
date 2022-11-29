@@ -8,7 +8,6 @@ import com.seoultech.capstone.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,8 @@ public class RoomController {
   @PostMapping
   public ResponseEntity<Void> makeRoom(@Auth String memberId,
       @RequestBody RoomRequest.CreateDto request) {
-    roomService.save(request.toEntity(memberService.findMemberById(memberId)));
+    roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
+        request.getParticipants());
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 

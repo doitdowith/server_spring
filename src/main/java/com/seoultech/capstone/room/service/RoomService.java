@@ -18,8 +18,9 @@ public class RoomService {
   private final RoomRepository roomRepository;
   private final RoomMemberService roomMemberService;
 
-  public void save(Room room) {
-    roomRepository.save(room);
+  public void makeRoom(Room room, List<String> participants) {
+    Room savedRoom = roomRepository.save(room);
+    roomMemberService.save(savedRoom, participants);
   }
 
   public Room findRoomById(String roomId) {
