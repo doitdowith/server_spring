@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @RestController
@@ -20,7 +21,7 @@ public class MessageController {
   private final MemberService memberService;
 
   @MessageMapping("/chat")
-  public void enter(@Auth String memberId, ChatMessage message) {
+  public void enter(@ApiIgnore @Auth String memberId, ChatMessage message) {
     Member member = memberService.findMemberById(memberId);
     ReceiveMessage receiveMessage = chatService.saveChat(member, message);
     simpMessageSendingOperations.convertAndSend("/sub/room/" + message.getRoomId(),

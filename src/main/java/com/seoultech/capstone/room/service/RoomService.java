@@ -28,6 +28,21 @@ public class RoomService {
         .orElseThrow();
   }
 
+  public AllRoom allRoom(Member member) {
+    
+    List<DoingRoom> doingRoomList = roomMemberService.findDoingRoomByMember(member).stream()
+        .map(DoingRoom::from)
+        .collect(Collectors.toList());
+    List<WillDoRoom> willDoRoomList = roomMemberService.findWillDoRoomByMember(member).stream()
+        .map(WillDoRoom::from)
+        .collect(Collectors.toList());
+    List<DoneRoom> doneRoomList = roomMemberService.findDoneByMember(member).stream()
+        .map(DoneRoom::from)
+        .collect(Collectors.toList());
+
+    return AllRoom.from(doingRoomList, willDoRoomList, doneRoomList);
+  }
+
   public List<DoingRoom> doingRoom(Member member) {
     List<Room> roomList = roomMemberService.findDoingRoomByMember(member);
     return roomList.stream()

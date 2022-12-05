@@ -4,6 +4,7 @@ import com.seoultech.capstone.config.login.Auth;
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.member.service.MemberService;
 import com.seoultech.capstone.room.controller.dto.RoomListResponse;
+import com.seoultech.capstone.room.service.AllRoom;
 import com.seoultech.capstone.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,29 +25,36 @@ public class RoomController {
   private final MemberService memberService;
 
   @PostMapping
-  public ResponseEntity<Void> makeRoom(@Auth String memberId,
+  public ResponseEntity<Void> makeRoom(@ApiIgnore @Auth String memberId,
       @RequestBody RoomRequest.CreateDto request) {
     roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
         request.getParticipants());
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
+  @GetMapping
+  public ResponseEntity<AllRoom> allRoom(@ApiIgnore @Auth String memberId) {
+    Member member = memberService.findMemberById(memberId);
+    return ResponseEntity.ok()
+        .body(roomService.allRoom(member));
+  }
+
   @GetMapping("/doing")
-  public ResponseEntity<RoomListResponse> doingRoom(@Auth String memberId) {
+  public ResponseEntity<RoomListResponse> doingRoom(@ApiIgnore @Auth String memberId) {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.doingRoom(member)));
   }
 
   @GetMapping("/willdo")
-  public ResponseEntity<RoomListResponse> willdoRoom(@Auth String memberId) {
+  public ResponseEntity<RoomListResponse> willdoRoom(@ApiIgnore @Auth String memberId) {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.willDoRoom(member)));
   }
 
   @GetMapping("/done")
-  public ResponseEntity<RoomListResponse> doneRoom(@Auth String memberId) {
+  public ResponseEntity<RoomListResponse> doneRoom(@ApiIgnore @Auth String memberId) {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.doneRoom(member)));

@@ -19,8 +19,8 @@ public class MemberService {
   private final FriendService friendService;
 
   public MyPage findMyPage(String memberId) {
-
-    return null;
+    Member member = findMemberById(memberId);
+    return MyPage.from(member);
   }
 
   public Member findMemberById(String memberId) {

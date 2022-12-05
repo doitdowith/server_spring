@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @RestController
@@ -23,7 +24,7 @@ public class ChatController {
   private final MemberService memberService;
 
   @GetMapping("/{roomId}")
-  public ResponseEntity<ChatListAllResponse> chatListAll(@Auth String memberId,
+  public ResponseEntity<ChatListAllResponse> chatListAll(@ApiIgnore @Auth String memberId,
       @PathVariable String roomId) {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()

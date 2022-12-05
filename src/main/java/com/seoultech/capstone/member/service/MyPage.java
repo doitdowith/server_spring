@@ -18,8 +18,9 @@ public class MyPage {
 
   private String dowithCode;
 
-//  public static MyPage from(Member member) {
-//    return new MyPage(member.getId(), );
-//  }
+  public static MyPage from(Member member) {
+    return new MyPage(member.getId(), member.getParticipationCount(), member.getFriendCount(), 0,
+        member.getDowithCode());
+  }
 
 }

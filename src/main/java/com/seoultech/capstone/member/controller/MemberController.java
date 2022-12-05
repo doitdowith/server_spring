@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,8 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("/mypage")
-  public ResponseEntity<MyPage> myPage(@Auth String memberId) {
+  public ResponseEntity<MyPage> myPage(@ApiIgnore @Auth String memberId) {
+
     return ResponseEntity.ok().build();
   }
 
