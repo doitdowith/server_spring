@@ -32,7 +32,7 @@ public class JwtFilter implements Filter {
       "/swagger-resources/**", "/v3/api-docs", "/swagger*/**", "/webjars/**", "/swagger-resources",
       "/api/v1/diary",
       "/api/v1/diary/**",
-      "/api/v1/images/**",
+      "/images/**",
       "/api/v1/members/**", "/api/v1/members", "/api/v1/bookmark"};
 
   @Override
