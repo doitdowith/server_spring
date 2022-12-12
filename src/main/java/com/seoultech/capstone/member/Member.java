@@ -34,31 +34,22 @@ public class Member {
   @OneToOne(fetch = FetchType.EAGER)
   private Image profileImage;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private Role role;
-
   private String dowithCode;
 
   @OneToMany(mappedBy = "member")
   private List<Friend> friendList;
 
-  @Formula("(select count(1) from roommember r where r.member_id = id)")
+  @Formula("(select count(1) from room_member r where r.member_id = id)")
   private Integer participationCount;
 
   @Formula("(select count(1) from friend f where f.member_id = id)")
   private Integer friendCount;
 
-  public String getRoleKey() {
-    return this.role.getKey();
-  }
-
   @Builder
-  public Member(String name, String email, Role role) {
+  public Member(String name, String email) {
     this.id = UUID.randomUUID().toString();
     this.name = name;
     this.email = email;
-    this.role = role;
     this.dowithCode = new Random().ints(48, 123)
         .filter(i -> (i <= 57 || i >= 65) && (i <= 90))
         .limit(7)

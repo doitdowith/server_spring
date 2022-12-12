@@ -27,6 +27,7 @@ public class RoomMemberService {
 
     List<RoomMember> collect = new ArrayList<>();
     Member sender = memberService.findMemberById(participants.get(0));
+    roomMemberRepository.save(new RoomMember(room, sender, true));
     for (int i = 1; i < participants.size(); i++) {
       Member member = memberService.findMemberById(participants.get(i));
       collect.add(new RoomMember(room, member, false));

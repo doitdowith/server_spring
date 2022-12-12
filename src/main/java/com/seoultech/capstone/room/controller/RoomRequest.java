@@ -11,7 +11,6 @@ import lombok.Getter;
 public class RoomRequest {
 
   @Getter
-  @AllArgsConstructor
   static class CreateDto {
 
     private String title;

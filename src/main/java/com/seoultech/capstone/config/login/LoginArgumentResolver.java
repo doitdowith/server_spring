@@ -1,8 +1,9 @@
 package com.seoultech.capstone.config.login;
 
+import com.seoultech.capstone.exception.NotExistMemberException;
+import javax.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -10,26 +11,27 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
+@RequiredArgsConstructor
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
+
+  private final HttpServletRequest httpServletRequest;
 
   @Override
   public boolean supportsParameter(MethodParameter parameter) {
-    return parameter.getParameterType() == String.class;
+
+    boolean isLoginUserAnnotation = parameter.getParameterAnnotation(Auth.class) != null;
+    boolean isStringClass = String.class.equals(parameter.getParameterType());
+
+    return isLoginUserAnnotation && isStringClass;
   }
 
   @Override
   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
       NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Object principal = null;
-
-    if (authentication != null) {
-      principal = authentication.getPrincipal();
+    Object memberId = httpServletRequest.getAttribute("memberId");
+    if (memberId == null) {
+      throw new NotExistMemberException();
     }
-    if (principal == null) {
-      return null;
-    }
-    return principal;
+    return memberId.toString();
   }
 }
