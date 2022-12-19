@@ -20,10 +20,12 @@ public class MyPage {
 
   private String dowithCode;
 
+  private String profileImage;
+
   public static MyPage from(Member member) {
     return new MyPage(member.getId(), member.getName(), member.getParticipationCount(),
         member.getFriendCount(), 0,
-        member.getDowithCode());
+        member.getDowithCode(), member.getProfileImage().getStoreFileName());
   }
 
 }
