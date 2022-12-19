@@ -74,6 +74,11 @@ public class MemberService {
     return LoginResponse.from(tokenDto, member);
   }
 
+  public Member findByDowithCode(String dowithCode) {
+    return memberRepository.findMemberByDowithCode(dowithCode)
+        .orElseThrow(NotExistMemberException::new);
+  }
+
   private String get(String apiUrl, String accessToken) {
 
     try {

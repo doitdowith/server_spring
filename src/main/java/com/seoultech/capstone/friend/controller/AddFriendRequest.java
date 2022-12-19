@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class AddFriendRequest {
 
-  private String followerId;
+  private String dowithCode;
 
 }

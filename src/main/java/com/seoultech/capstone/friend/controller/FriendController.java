@@ -43,7 +43,7 @@ public class FriendController {
   public ResponseEntity<Void> sendFriendRequest(@ApiIgnore @Auth String memberId,
       @RequestBody AddFriendRequest request) {
     Member member = memberService.findMemberById(memberId);
-    Member follower = memberService.findMemberById(request.getFollowerId());
+    Member follower = memberService.findByDowithCode(request.getDowithCode());
     friendService.addFriend(member, follower);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -53,7 +53,7 @@ public class FriendController {
   public ResponseEntity<Void> acceptFriendRequest(
       @ApiIgnore @Auth String memberId, @RequestBody AddFriendRequest request) {
     Member follower = memberService.findMemberById(memberId);
-    Member member = memberService.findMemberById(request.getFollowerId());
+    Member member = memberService.findMemberById(request.getDowithCode());
     friendService.acceptFriend(member, follower);
 
     return ResponseEntity.status(HttpStatus.OK).build();
