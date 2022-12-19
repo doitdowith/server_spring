@@ -19,7 +19,7 @@ public class FriendService {
 
   public void addFriend(Member member, Member follower) {
     friendRepository.save(
-        new Friend(new Key(member.getId(), follower.getId()), member, follower, false));
+        new Friend(new Key(member.getId(), follower.getId()), member, follower, true));
   }
 
   public void acceptFriend(Member member, Member follower) {
