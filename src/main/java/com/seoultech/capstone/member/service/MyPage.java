@@ -10,6 +10,8 @@ public class MyPage {
 
   private String memberId;
 
+  private String name;
+
   private Integer participationCount;
 
   private Integer friendCount;
@@ -19,7 +21,8 @@ public class MyPage {
   private String dowithCode;
 
   public static MyPage from(Member member) {
-    return new MyPage(member.getId(), member.getParticipationCount(), member.getFriendCount(), 0,
+    return new MyPage(member.getId(), member.getName(), member.getParticipationCount(),
+        member.getFriendCount(), 0,
         member.getDowithCode());
   }
 
