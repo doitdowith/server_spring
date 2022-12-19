@@ -29,7 +29,7 @@ public class RoomService {
   }
 
   public AllRoom allRoom(Member member) {
-    
+
     List<DoingRoom> doingRoomList = roomMemberService.findDoingRoomByMember(member).stream()
         .map(DoingRoom::from)
         .collect(Collectors.toList());
