@@ -40,8 +40,10 @@ public class FriendController {
   private final FriendService friendService;
 
   @PostMapping
-  public ResponseEntity<Void> sendFriendRequest(@ApiIgnore @Auth String memberId,
+  public ResponseEntity<Void> sendFriendRequest(HttpServletRequest servletRequest,
       @RequestBody AddFriendRequest request) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member member = memberService.findMemberById(memberId);
     Member follower = memberService.findByDowithCode(request.getDowithCode());
     friendService.addFriend(member, follower);
@@ -51,7 +53,9 @@ public class FriendController {
 
   @PostMapping("/accept")
   public ResponseEntity<Void> acceptFriendRequest(
-      @ApiIgnore @Auth String memberId, @RequestBody AddFriendRequest request) {
+      HttpServletRequest servletRequest, @RequestBody AddFriendRequest request) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member follower = memberService.findMemberById(memberId);
     Member member = memberService.findMemberById(request.getDowithCode());
     friendService.acceptFriend(member, follower);
