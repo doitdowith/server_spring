@@ -52,28 +52,36 @@ public class RoomController {
   }
 
   @GetMapping
-  public ResponseEntity<AllRoom> allRoom(@ApiIgnore @Auth String memberId) {
+  public ResponseEntity<AllRoom> allRoom(HttpServletRequest servletRequest) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(roomService.allRoom(member));
   }
 
   @GetMapping("/doing")
-  public ResponseEntity<RoomListResponse> doingRoom(@ApiIgnore @Auth String memberId) {
+  public ResponseEntity<RoomListResponse> doingRoom(HttpServletRequest servletRequest) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.doingRoom(member)));
   }
 
   @GetMapping("/willdo")
-  public ResponseEntity<RoomListResponse> willdoRoom(@ApiIgnore @Auth String memberId) {
+  public ResponseEntity<RoomListResponse> willdoRoom(HttpServletRequest servletRequest) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.willDoRoom(member)));
   }
 
   @GetMapping("/done")
-  public ResponseEntity<RoomListResponse> doneRoom(@ApiIgnore @Auth String memberId) {
+  public ResponseEntity<RoomListResponse> doneRoom(HttpServletRequest servletRequest) {
+    String token = resolveToken(servletRequest);
+    String memberId = validateToken(token);
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(RoomListResponse.from(roomService.doneRoom(member)));
