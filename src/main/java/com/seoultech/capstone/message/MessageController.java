@@ -21,8 +21,9 @@ public class MessageController {
   private final MemberService memberService;
 
   @MessageMapping("/chat")
-  public void enter(@ApiIgnore @Auth String memberId, ChatMessage message) {
-    Member member = memberService.findMemberById(memberId);
+  public void enter(ChatMessage message) {
+    log.info("memberId -> {}", message.getMemberId());
+    Member member = memberService.findMemberById(message.getMemberId());
     ReceiveMessage receiveMessage = chatService.saveChat(member, message);
     simpMessageSendingOperations.convertAndSend("/sub/room/" + message.getRoomId(),
         receiveMessage);

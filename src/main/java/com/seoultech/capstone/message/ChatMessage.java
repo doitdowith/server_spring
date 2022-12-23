@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public class ChatMessage {
 
+  private String memberId;
   private String contents;
   private String roomId;
 
