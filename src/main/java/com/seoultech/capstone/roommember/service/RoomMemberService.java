@@ -68,4 +68,12 @@ public class RoomMemberService {
         .collect(Collectors.toList());
   }
 
+  public List<Member> findMemberListByRoom(Room room) {
+    return roomMemberRepository.findRoomMembersByRoom(room).stream()
+        .map(RoomMember::getMember)
+        .collect(Collectors.toList());
+
+
+  }
+
 }

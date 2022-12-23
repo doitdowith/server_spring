@@ -4,6 +4,7 @@ import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.room.Room;
 import com.seoultech.capstone.room.repository.RoomRepository;
 import com.seoultech.capstone.roommember.service.RoomMemberService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -30,38 +31,84 @@ public class RoomService {
 
   public AllRoom allRoom(Member member) {
 
-    List<DoingRoom> doingRoomList = roomMemberService.findDoingRoomByMember(member).stream()
-        .map(DoingRoom::from)
-        .collect(Collectors.toList());
-    List<WillDoRoom> willDoRoomList = roomMemberService.findWillDoRoomByMember(member).stream()
-        .map(WillDoRoom::from)
-        .collect(Collectors.toList());
-    List<DoneRoom> doneRoomList = roomMemberService.findDoneByMember(member).stream()
-        .map(DoneRoom::from)
-        .collect(Collectors.toList());
+    List<DoingRoom> doingRoomList = doingRoom(member);
+    List<WillDoRoom> willDoRoomList = willDoRoom(member);
+    List<DoneRoom> doneRoomList = doneRoom(member);
 
     return AllRoom.from(doingRoomList, willDoRoomList, doneRoomList);
   }
 
   public List<DoingRoom> doingRoom(Member member) {
     List<Room> roomList = roomMemberService.findDoingRoomByMember(member);
-    return roomList.stream()
-        .map(DoingRoom::from)
-        .collect(Collectors.toList());
+
+    List<DoingRoom> collect = null;
+    for (Room room : roomList) {
+      List<Member> memberList = roomMemberService.findMemberListByRoom(room);
+      List<String> nameList = new ArrayList<>();
+      List<String> imageList = new ArrayList<>();
+      Member master = room.getMaster();
+      nameList.add(master.getName());
+      imageList.add(master.getProfileImage().getStoreFileName());
+      for (Member tempMember : memberList) {
+        if (tempMember.getName().equals(master.getName())) {
+          continue;
+        }
+        nameList.add(tempMember.getName());
+        imageList.add(tempMember.getProfileImage().getStoreFileName());
+      }
+
+      collect.add(DoingRoom.from(room, nameList, imageList));
+    }
+
+    return collect;
   }
 
   public List<WillDoRoom> willDoRoom(Member member) {
     List<Room> roomList = roomMemberService.findWillDoRoomByMember(member);
-    return roomList.stream()
-        .map(WillDoRoom::from)
-        .collect(Collectors.toList());
+    List<WillDoRoom> collect = null;
+    for (Room room : roomList) {
+      List<Member> memberList = roomMemberService.findMemberListByRoom(room);
+      List<String> nameList = new ArrayList<>();
+      List<String> imageList = new ArrayList<>();
+      Member master = room.getMaster();
+      nameList.add(master.getName());
+      imageList.add(master.getProfileImage().getStoreFileName());
+      for (Member tempMember : memberList) {
+        if (tempMember.getName().equals(master.getName())) {
+          continue;
+        }
+        nameList.add(tempMember.getName());
+        imageList.add(tempMember.getProfileImage().getStoreFileName());
+      }
+
+      collect.add(WillDoRoom.from(room, nameList, imageList));
+    }
+
+    return collect;
   }
 
   public List<DoneRoom> doneRoom(Member member) {
     List<Room> roomList = roomMemberService.findDoneByMember(member);
-    return roomList.stream()
-        .map(DoneRoom::from)
-        .collect(Collectors.toList());
+    List<DoneRoom> collect = null;
+    for (Room room : roomList) {
+      List<Member> memberList = roomMemberService.findMemberListByRoom(room);
+      List<String> nameList = new ArrayList<>();
+      List<String> imageList = new ArrayList<>();
+      Member master = room.getMaster();
+      nameList.add(master.getName());
+      imageList.add(master.getProfileImage().getStoreFileName());
+      for (Member tempMember : memberList) {
+        if (tempMember.getName().equals(master.getName())) {
+          continue;
+        }
+        nameList.add(tempMember.getName());
+        imageList.add(tempMember.getProfileImage().getStoreFileName());
+      }
+
+      collect.add(DoneRoom.from(room, nameList, imageList));
+    }
+
+    return collect;
   }
 
 
