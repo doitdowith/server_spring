@@ -40,7 +40,7 @@ public class RoomController {
   private final MemberService memberService;
 
   @PostMapping
-  public ResponseEntity<Void> makeRoom(HttpServletRequest servletRequest,
+  public ResponseEntity<RoomResponse.CreateDto> makeRoom(HttpServletRequest servletRequest,
       @RequestBody RoomRequest.CreateDto request) {
 
     String token = resolveToken(servletRequest);
@@ -48,7 +48,10 @@ public class RoomController {
 
     roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
         request.getParticipants());
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return ResponseEntity.ok()
+        .body(RoomResponse.CreateDto.from(
+            roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
+                request.getParticipants())));
   }
 
   @GetMapping
