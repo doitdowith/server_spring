@@ -46,8 +46,6 @@ public class RoomController {
     String token = resolveToken(servletRequest);
     String memberId = validateToken(token);
 
-    roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
-        request.getParticipants());
     return ResponseEntity.ok()
         .body(RoomResponse.CreateDto.from(
             roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
