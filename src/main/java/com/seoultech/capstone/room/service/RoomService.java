@@ -41,7 +41,7 @@ public class RoomService {
   public List<DoingRoom> doingRoom(Member member) {
     List<Room> roomList = roomMemberService.findDoingRoomByMember(member);
 
-    List<DoingRoom> collect = null;
+    List<DoingRoom> collect = new ArrayList<>();
     for (Room room : roomList) {
       List<Member> memberList = roomMemberService.findMemberListByRoom(room);
       List<String> nameList = new ArrayList<>();
@@ -65,7 +65,7 @@ public class RoomService {
 
   public List<WillDoRoom> willDoRoom(Member member) {
     List<Room> roomList = roomMemberService.findWillDoRoomByMember(member);
-    List<WillDoRoom> collect = null;
+    List<WillDoRoom> collect = new ArrayList<>();
     for (Room room : roomList) {
       List<Member> memberList = roomMemberService.findMemberListByRoom(room);
       List<String> nameList = new ArrayList<>();
@@ -89,7 +89,7 @@ public class RoomService {
 
   public List<DoneRoom> doneRoom(Member member) {
     List<Room> roomList = roomMemberService.findDoneByMember(member);
-    List<DoneRoom> collect = null;
+    List<DoneRoom> collect = new ArrayList<>();
     for (Room room : roomList) {
       List<Member> memberList = roomMemberService.findMemberListByRoom(room);
       List<String> nameList = new ArrayList<>();
