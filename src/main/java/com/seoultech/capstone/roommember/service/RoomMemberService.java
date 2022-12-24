@@ -41,8 +41,8 @@ public class RoomMemberService {
     List<RoomMember> roomMemberList = roomMemberRepository.findRoomMembersByMember(member);
     return roomMemberList.stream()
         .map(RoomMember::getRoom)
-        .filter(room -> room.getStartDate().isBefore(LocalDate.now()) || room.getStartDate()
-            .isEqual(LocalDate.now()))
+        .filter(room -> (room.getStartDate().isBefore(LocalDate.now()) || room.getStartDate()
+            .isEqual(LocalDate.now())) && room.getStartDate().plusDays(7L).isAfter(LocalDate.now()))
         .collect(Collectors.toList());
   }
 
