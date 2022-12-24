@@ -41,7 +41,7 @@ public class RoomMemberService {
     List<RoomMember> roomMemberList = roomMemberRepository.findRoomMembersByMember(member);
     return roomMemberList.stream()
         .map(RoomMember::getRoom)
-        .filter(room -> room.getStartDate().compareTo(LocalDate.now()) >= 0)
+        .filter(room -> room.getStartDate().compareTo(LocalDate.now()) > 0)
         .collect(Collectors.toList());
   }
 
@@ -49,7 +49,7 @@ public class RoomMemberService {
     List<RoomMember> roomMemberList = roomMemberRepository.findRoomMembersByMember(member);
     return roomMemberList.stream()
         .map(RoomMember::getRoom)
-        .filter(room -> room.getStartDate().compareTo(LocalDate.now()) < 0)
+        .filter(room -> room.getStartDate().compareTo(LocalDate.now()) >= 0)
         .collect(Collectors.toList());
   }
 
@@ -57,7 +57,7 @@ public class RoomMemberService {
     List<RoomMember> roomMemberList = roomMemberRepository.findRoomMembersByMember(member);
     return roomMemberList.stream()
         .map(RoomMember::getRoom)
-        .filter(room -> room.getStartDate().plusDays(7L).compareTo(LocalDate.now()) > 0)
+        .filter(room -> room.getStartDate().plusDays(7L).compareTo(LocalDate.now()) < 0)
         .collect(Collectors.toList());
   }
 
