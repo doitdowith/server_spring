@@ -1,11 +1,15 @@
 package com.seoultech.capstone.room.service;
 
+import com.seoultech.capstone.exception.NotCreateRoomException;
 import com.seoultech.capstone.member.Member;
 import com.seoultech.capstone.room.Room;
 import com.seoultech.capstone.room.repository.RoomRepository;
 import com.seoultech.capstone.roommember.service.RoomMemberService;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,29 @@ public class RoomService {
   private final RoomRepository roomRepository;
   private final RoomMemberService roomMemberService;
 
-  public String makeRoom(Room room, List<String> participants) {
+  public String makeRoom(Room room, List<String> participants, Member member) {
+    Map<LocalDate, Integer> map = new HashMap<>();
+    List<Room> roomList = roomMemberService.findRoomListByMember(member);
+    for (Room room1 : roomList) {
+      for (long i = 0L; i < 7; i++) {
+        LocalDate localDate = room1.getStartDate().plusDays(i);
+        if (map.containsKey(localDate)) {
+          map.put(localDate, map.get(localDate) + 1);
+        } else {
+          map.put(localDate, 1);
+        }
+      }
+    }
+
+    for (long i = 0L; i < 7; i++) {
+      LocalDate localDate = room.getStartDate().plusDays(i);
+      if (map.containsKey(localDate)) {
+        if (map.get(localDate) == 3) {
+          throw new NotCreateRoomException();
+        }
+      }
+    }
+
     Room savedRoom = roomRepository.save(room);
     roomMemberService.save(savedRoom, participants);
 

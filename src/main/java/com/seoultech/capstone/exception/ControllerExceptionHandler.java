@@ -26,6 +26,18 @@ public class ControllerExceptionHandler {
   }
 
   @ExceptionHandler(value = {
+      NotCreateRoomException.class,
+  })
+  public ResponseEntity<BadRequestFailResponse> badRequest(Exception e) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(BadRequestFailResponse.builder()
+            .status(HttpStatus.BAD_REQUEST.value())
+            .message(e.getMessage())
+            .build()
+        );
+  }
+
+  @ExceptionHandler(value = {
       BindException.class,
       MethodArgumentNotValidException.class
   })

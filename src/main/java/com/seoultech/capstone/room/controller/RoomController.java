@@ -45,11 +45,12 @@ public class RoomController {
 
     String token = resolveToken(servletRequest);
     String memberId = validateToken(token);
+    Member member = memberService.findMemberById(memberId);
 
     return ResponseEntity.ok()
         .body(RoomResponse.CreateDto.from(
-            roomService.makeRoom(request.toEntity(memberService.findMemberById(memberId)),
-                request.getParticipants())));
+            roomService.makeRoom(request.toEntity(member),
+                request.getParticipants(), member)));
   }
 
   @GetMapping
