@@ -29,7 +29,7 @@ public class ControllerExceptionHandler {
       NotCreateRoomException.class,
   })
   public ResponseEntity<BadRequestFailResponse> badRequest(Exception e) {
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    return ResponseEntity.status(HttpStatus.OK)
         .body(BadRequestFailResponse.builder()
             .status(HttpStatus.BAD_REQUEST.value())
             .message(e.getMessage())
