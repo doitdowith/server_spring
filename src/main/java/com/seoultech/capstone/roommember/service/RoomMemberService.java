@@ -1,7 +1,9 @@
 package com.seoultech.capstone.roommember.service;
 
 import com.seoultech.capstone.alarm.AlarmService;
+import com.seoultech.capstone.exception.NotExistMemberException;
 import com.seoultech.capstone.member.Member;
+import com.seoultech.capstone.member.MemberRepository;
 import com.seoultech.capstone.member.service.MemberService;
 import com.seoultech.capstone.room.Room;
 import com.seoultech.capstone.roommember.RoomMember;
@@ -21,15 +23,15 @@ public class RoomMemberService {
 
   private final RoomMemberRepository roomMemberRepository;
   private final AlarmService alarmService;
-  private final MemberService memberService;
+  private final MemberRepository memberRepository;
 
   public void save(Room room, List<String> participants) {
 
     List<RoomMember> collect = new ArrayList<>();
-    Member sender = memberService.findMemberById(participants.get(0));
+    Member sender = memberRepository.findById(participants.get(0)).orElseThrow(NotExistMemberException::new);
     roomMemberRepository.save(new RoomMember(room, sender, true));
     for (int i = 1; i < participants.size(); i++) {
-      Member member = memberService.findMemberById(participants.get(i));
+      Member member = memberRepository.findById(participants.get(i)).orElseThrow(NotExistMemberException::new);
       collect.add(new RoomMember(room, member, false));
       alarmService.save(room, member, sender);
     }
