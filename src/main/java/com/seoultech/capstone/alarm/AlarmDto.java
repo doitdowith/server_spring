@@ -11,9 +11,10 @@ public class AlarmDto {
 
     private String date;
     private String name;
+    private String category;
 
     public static AlarmDto from(Alarm alarm) {
-        return new AlarmDto(alarm.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), alarm.getMember().getName());
+        return new AlarmDto(alarm.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), alarm.getMember().getName(), alarm.getCategory().name());
     }
 
 }
