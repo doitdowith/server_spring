@@ -17,16 +17,16 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
+
+import java.io.IOException;
 import java.security.Key;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
@@ -46,6 +46,17 @@ public class ChatController {
     Member member = memberService.findMemberById(memberId);
     return ResponseEntity.ok()
         .body(ChatListAllResponse.from(chatService.listAll(member, roomId)));
+  }
+
+  @PostMapping("/certification")
+  public ResponseEntity<Void> certification(HttpServletRequest servletRequest, @ModelAttribute CertificationRequest request) throws IOException {
+
+    String memberId = validateToken(resolveToken(servletRequest));
+    Member member = memberService.findMemberById(memberId);
+
+    chatService.certification(member,request);
+
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   private String resolveToken(HttpServletRequest request) {
