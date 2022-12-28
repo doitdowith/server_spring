@@ -50,7 +50,7 @@ public class ImageService {
 
     List<Image> images = collect.stream()
         .map(
-            (name) -> new Image(name.getOriginalFilename(), name.getStoreFileName(), Category.POST))
+            (name) -> new Image(name.getOriginalFilename(), name.getStoreFileName(), Category.CERTIFICATION))
         .collect(Collectors.toList());
     imageRepository.saveAll(images);
 
