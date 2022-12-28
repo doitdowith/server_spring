@@ -22,9 +22,9 @@ public class MyPage {
 
   private String profileImage;
 
-  public static MyPage from(Member member, Integer friendCount) {
+  public static MyPage from(Member member, Integer friendCount, int successRate) {
     return new MyPage(member.getId(), member.getName(), member.getParticipationCount(),
-        friendCount, 0,
+        friendCount, successRate,
         member.getDowithCode(), member.getProfileImage().getStoreFileName());
   }
 

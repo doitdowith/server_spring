@@ -3,6 +3,7 @@ package com.seoultech.capstone.member.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.seoultech.capstone.chat.Chat;
 import com.seoultech.capstone.config.jwt.TokenDto;
 import com.seoultech.capstone.config.jwt.TokenProvider;
 import com.seoultech.capstone.exception.NotExistMemberException;
@@ -18,6 +19,11 @@ import com.seoultech.capstone.member.controller.LoginResponse;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.seoultech.capstone.room.Room;
+import com.seoultech.capstone.room.service.RoomService;
+import com.seoultech.capstone.roommember.service.RoomMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +44,7 @@ public class MemberService {
   private final FriendService friendService;
   private final ImageService imageService;
   private final RestTemplate restTemplate;
+  private final RoomMemberService roomMemberService;
 
   public MyPage findMyPage(String memberId) {
     Member member = findMemberById(memberId);
@@ -46,7 +53,27 @@ public class MemberService {
     List<Friend> friends2 = friendService.findFriendsByFollower(member);
 
 
-    return MyPage.from(member, friends1.size() + friends2.size());
+    List<Room> roomList = roomMemberService.findRoomListByMember(member);
+
+    int result = 0;
+    for (Room room : roomList) {
+
+      List<Chat> chatList = room.getChatList();
+      long count = chatList.stream()
+              .filter(chat -> chat.getImage() != null)
+              .map(Chat::getMember)
+              .count();
+
+      if (room.getCertificationCount() <= count) {
+        result++;
+      }
+    }
+    int successRate = 0;
+    if (roomList.size() != 0) {
+      successRate = result / roomList.size() * 100;
+    }
+
+    return MyPage.from(member, friends1.size() + friends2.size(), successRate);
   }
 
   public Member findMemberById(String memberId) {
