@@ -58,15 +58,23 @@ public class MemberService {
     int result = 0;
     for (Room room : roomList) {
 
+      int count = 0;
       List<Chat> chatList = room.getChatList();
-      long count = chatList.stream()
+      List<Member> collect = chatList.stream()
               .filter(chat -> chat.getImage() != null)
               .map(Chat::getMember)
-              .count();
+              .collect(Collectors.toList());
+
+      for (Member member1 : collect) {
+        if (member1.getId().equals(memberId)) {
+            count++;
+        }
+      }
 
       if (room.getCertificationCount() <= count) {
         result++;
       }
+
     }
     int successRate = 0;
     if (roomList.size() != 0) {
