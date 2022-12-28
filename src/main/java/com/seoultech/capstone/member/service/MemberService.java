@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import com.seoultech.capstone.config.jwt.TokenDto;
 import com.seoultech.capstone.config.jwt.TokenProvider;
 import com.seoultech.capstone.exception.NotExistMemberException;
+import com.seoultech.capstone.friend.Friend;
 import com.seoultech.capstone.friend.service.FriendService;
 import com.seoultech.capstone.image.Image;
 import com.seoultech.capstone.image.ImageService;
@@ -14,6 +15,8 @@ import com.seoultech.capstone.member.MemberRepository;
 
 
 import com.seoultech.capstone.member.controller.LoginResponse;
+
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -38,7 +41,12 @@ public class MemberService {
 
   public MyPage findMyPage(String memberId) {
     Member member = findMemberById(memberId);
-    return MyPage.from(member);
+
+    List<Friend> friends1 = friendService.findFriendsByMember(member);
+    List<Friend> friends2 = friendService.findFriendsByFollower(member);
+
+
+    return MyPage.from(member, friends1.size() + friends2.size());
   }
 
   public Member findMemberById(String memberId) {
