@@ -23,29 +23,7 @@ public class RoomService {
   private final RoomRepository roomRepository;
   private final RoomMemberService roomMemberService;
 
-  public String makeRoom(Room room, List<String> participants, Member member) {
-    Map<LocalDate, Integer> map = new HashMap<>();
-    List<Room> roomList = roomMemberService.findRoomListByMember(member);
-    for (Room room1 : roomList) {
-      for (long i = 0L; i < 7; i++) {
-        LocalDate localDate = room1.getStartDate().plusDays(i);
-        if (map.containsKey(localDate)) {
-          map.put(localDate, map.get(localDate) + 1);
-        } else {
-          map.put(localDate, 1);
-        }
-      }
-    }
-
-    for (long i = 0L; i < 7; i++) {
-      LocalDate localDate = room.getStartDate().plusDays(i);
-      if (map.containsKey(localDate)) {
-        if (map.get(localDate) == 3) {
-          throw new NotCreateRoomException();
-        }
-      }
-    }
-
+  public String makeRoom(Room room, List<String> participants) {
     Room savedRoom = roomRepository.save(room);
     roomMemberService.save(savedRoom, participants);
 

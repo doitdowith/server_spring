@@ -50,7 +50,7 @@ public class RoomController {
     return ResponseEntity.ok()
         .body(RoomResponse.CreateDto.from(
             roomService.makeRoom(request.toEntity(member),
-                request.getParticipants(), member)));
+                request.getParticipants())));
   }
 
   @GetMapping
