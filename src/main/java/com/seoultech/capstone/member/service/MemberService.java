@@ -67,7 +67,7 @@ public class MemberService {
 
       for (Member member1 : collect) {
         if (member1.getId().equals(memberId)) {
-            count++;
+          count++;
         }
       }
 
@@ -78,7 +78,7 @@ public class MemberService {
     }
     int successRate = 0;
     if (roomList.size() != 0) {
-      successRate = result / roomList.size() * 100;
+      successRate = result * 100 / roomList.size();
     }
 
     return MyPage.from(member, friends1.size() + friends2.size(), successRate);
