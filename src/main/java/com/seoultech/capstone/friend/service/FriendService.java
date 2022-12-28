@@ -1,5 +1,6 @@
 package com.seoultech.capstone.friend.service;
 
+import com.seoultech.capstone.alarm.AlarmService;
 import com.seoultech.capstone.friend.Friend;
 import com.seoultech.capstone.friend.Friend.Key;
 import com.seoultech.capstone.friend.repository.FriendRepository;
@@ -16,10 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class FriendService {
 
   private final FriendRepository friendRepository;
+  private final AlarmService alarmService;
 
   public void addFriend(Member member, Member follower) {
     friendRepository.save(
         new Friend(new Key(member.getId(), follower.getId()), member, follower, true));
+
+    alarmService.savefriendAlarm(member, follower);
   }
 
   public void acceptFriend(Member member, Member follower) {

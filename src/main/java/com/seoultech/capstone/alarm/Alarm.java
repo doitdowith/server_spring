@@ -2,6 +2,8 @@ package com.seoultech.capstone.alarm;
 
 import com.seoultech.capstone.BaseTimeEntity;
 import com.seoultech.capstone.member.Member;
+import lombok.Getter;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Getter
 public class Alarm extends BaseTimeEntity {
 
   @Id
